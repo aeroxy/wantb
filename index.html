@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="WCTB" class="no-js loading">
+  <head>
+    <title>翼码旺财 | 数据监控系统</title>
+    <!--[if IE]>
+      <script language="javascript" type="text/javascript">
+        window.location.href='ie.html';
+      </script>
+    <![endif]-->
+    <meta lang="zh-cmn-Hans" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Aero Wang">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="css/angular-material.min.css"/>
+    <link rel="stylesheet" href="css/tboard.css"/>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-aria.min.js"></script>
+    <script src="js/angular-material.min.js"></script>
+    <script src="js/angular-messages.min.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+  </head>
+  <body oncontextmenu="return false">
+    <div id="loading">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <div id="app" ng-cloak layout="row" ng-controller="AppCtrl">
+      <div id="leftpanel" flex="50" layout="column">
+        <div flex layout="column">
+          <h3>订单笔数实时监控</h3>
+          <div id="volume" flex></div>
+        </div>
+        <div flex layout="column">
+          <h3>交易金额实施监控</h3>
+          <div id="total" flex></div>
+        </div>
+      </div>
+      <div id="rightpanel" flex="50">
+        <h3>实时交易查询</h3>
+        <table>
+          <tr>
+            <th>交易时间</th>
+            <th>商户名称</th>
+            <th>交易金额</th>
+            <th>支付渠道</th>
+            <th>终端类型</th>
+          </tr>
+          <tr ng-repeat="x in lists">
+            <th>{{x[0]}}</th>
+            <th>{{x[1]}}</th>
+            <th>{{x[2]|number:2}}元</th>
+            <th>{{x[3]|paymethod}}</th>
+            <th>{{x[3]|terminal}}</th>
+          </tr>
+        </table>
+      </div>
+      <footer layout="row">
+        <div layout="column" layout-align="center center" ng-repeat="x in overviews">
+          <h1>{{x.name}}</h1>
+          <h2 ng-bind-html="x.volume">{{x.volume}}</h2>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="js/tboard.js"></script>
+</html>
